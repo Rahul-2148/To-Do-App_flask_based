@@ -9,7 +9,12 @@ content %}
     </form>
 
     <!-- Delete Selected -->
-    <form method="POST" action="{{ url_for('tasks.delete_selected') }}" id="deleteSelectedForm" class="d-none">
+    <form
+      method="POST"
+      action="{{ url_for('tasks.delete_selected') }}"
+      id="deleteSelectedForm"
+      class="d-none"
+    >
       <input type="hidden" name="selected_tasks" id="selectedTasksInput" />
       <button type="submit" class="btn btn-warning btn-sm text-dark">
         🗑️ Delete Selected
@@ -17,7 +22,6 @@ content %}
     </form>
   </div>
 </div>
-
 
 <form
   method="POST"
@@ -50,17 +54,23 @@ content %}
     <tbody>
       {% for task in tasks %}
       <tr class="status-{{ task.status|lower }}">
-        <td>
-          <input type="checkbox" class="form-check-input task-checkbox" name="selected_task" value="{{ task.id }}" onchange="toggleDeleteSelectedButton()" />
-
+        <td data-label="Select">
+          <input
+            type="checkbox"
+            class="form-check-input task-checkbox"
+            name="selected_task"
+            value="{{ task.id }}"
+            onchange="toggleDeleteSelectedButton()"
+          />
         </td>
-        <td>{{ loop.index }}</td>
+        <td data-label="#">{{ loop.index }}</td>
         <td
+          data-label="Task"
           class="task-title {% if task.status == 'done' %}done-task{% endif %}"
         >
           {{ task.title }}
         </td>
-        <td>
+        <td data-label="Status">
           {% if task.status == 'pending' %}
           <span class="task-badge pending">Pending</span>
           {% elif task.status == 'working' %}
@@ -69,7 +79,7 @@ content %}
           <span class="task-badge done">Done</span>
           {% endif %}
         </td>
-        <td>
+        <td data-label="Action">
           <form
             method="POST"
             action="{{ url_for('tasks.toggle_status', task_id=task.id) }}"
@@ -80,6 +90,7 @@ content %}
           </form>
         </td>
       </tr>
+
       {% else %}
       <tr>
         <td colspan="5">No tasks added yet!</td>

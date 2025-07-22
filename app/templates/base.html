@@ -21,9 +21,25 @@
   </head>
 
   <body class="theme-{{ session.get('theme', 'light') }}">
+    <!-- ✅ Responsive Navbar -->
     <nav class="navbar navbar-expand-lg theme-navbar px-4 fixed-top">
       <a class="navbar-brand" href="#">📝 TODO APP</a>
-      <div class="collapse navbar-collapse">
+
+      <!-- Toggler for mobile -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ms-auto">
           {% if current_user.is_authenticated %}
           <li class="nav-item">
@@ -42,9 +58,7 @@
             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.register') }}"
-              >Register</a
-            >
+            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
           </li>
           {% endif %}
 
@@ -56,51 +70,28 @@
               id="themeDropdown"
               role="button"
               data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
               Theme 🎨
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
               <li>
-                <a
-                  class="dropdown-item theme-select"
-                  data-theme="light"
-                  href="#"
-                  >🌕 Light</a
-                >
+                <a class="dropdown-item theme-select" data-theme="light" href="#">🌕 Light</a>
               </li>
               <li>
-                <a class="dropdown-item theme-select" data-theme="dark" href="#"
-                  >🌑 Dark</a
-                >
+                <a class="dropdown-item theme-select" data-theme="dark" href="#">🌑 Dark</a>
               </li>
               <li>
-                <a
-                  class="dropdown-item theme-select"
-                  data-theme="forest"
-                  href="#"
-                  >🌲 Forest</a
-                >
+                <a class="dropdown-item theme-select" data-theme="forest" href="#">🌲 Forest</a>
               </li>
               <li>
-                <a class="dropdown-item theme-select" data-theme="sky" href="#"
-                  >🌤️ Sky</a
-                >
+                <a class="dropdown-item theme-select" data-theme="sky" href="#">🌤️ Sky</a>
               </li>
               <li>
-                <a
-                  class="dropdown-item theme-select"
-                  data-theme="dracula"
-                  href="#"
-                  >🧛 Dracula</a
-                >
+                <a class="dropdown-item theme-select" data-theme="dracula" href="#">🧛 Dracula</a>
               </li>
               <li>
-                <a
-                  class="dropdown-item theme-select"
-                  data-theme="indian_theme"
-                  href="#"
-                  >🎉 Indian Festival</a
-                >
+                <a class="dropdown-item theme-select" data-theme="indian_theme" href="#">🎉 Indian Festival</a>
               </li>
             </ul>
           </li>
@@ -108,37 +99,36 @@
       </div>
     </nav>
 
-    <main class="container py-4">
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %}
-      <div class="mt-2">
-        {% for category, message in messages %}
-        <div
-          class="alert alert-{{ 'success' if category == 'message' else category }} alert-dismissible fade show"
-          role="alert"
-        >
-          {{ message }}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          ></button>
+    <!-- ✅ Main content area -->
+   <main class="container mt-navbar">
+  <div class="theme-content p-4 rounded">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mt-2">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'success' if category == 'message' else category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
-      {% endif %} {% endwith %} {% block content %}{% endblock %}
-    </main>
+      {% endif %}
+    {% endwith %}
 
-    <footer>
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+
+    <!-- ✅ Footer -->
+    <footer class="text-center py-3 mt-auto">
       <div class="container">
         &copy; {{ current_year or 2025 }} Flask TODO App. Built with ❤️ by
-        <a href="https://github.com/Rahul-2148" target="_blank" rel="noopener"
-          >Rahul Raj Modi</a
-        >
+        <a href="https://github.com/Rahul-2148" target="_blank" rel="noopener">Rahul Raj Modi</a>
       </div>
     </footer>
 
+    <!-- ✅ Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
   </body>

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Theme switch logic
+  // 🔁 Theme switch logic
   const themeLinks = document.querySelectorAll(".theme-select");
 
   themeLinks.forEach(link => {
@@ -16,10 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Toggle visibility of "Delete Selected" form
-  const checkboxes = document.querySelectorAll('.task-checkbox');
-  const deleteSelectedForm = document.getElementById('deleteSelectedForm');
-  const selectedTasksInput = document.getElementById('selectedTasksInput');
+  // ✅ Handle content spacing when hamburger opens/closes
+  const navbarCollapse = document.getElementById("navbarContent");
+
+  if (navbarCollapse) {
+    navbarCollapse.addEventListener("shown.bs.collapse", () => {
+      document.body.classList.add("nav-open");
+    });
+
+    navbarCollapse.addEventListener("hidden.bs.collapse", () => {
+      document.body.classList.remove("nav-open");
+    });
+  }
+
+  // 🗑️ Toggle "Delete Selected" form visibility
+  const checkboxes = document.querySelectorAll(".task-checkbox");
+  const deleteSelectedForm = document.getElementById("deleteSelectedForm");
+  const selectedTasksInput = document.getElementById("selectedTasksInput");
 
   if (checkboxes.length && deleteSelectedForm) {
     function toggleDeleteSelectedButton() {
@@ -28,19 +41,18 @@ document.addEventListener("DOMContentLoaded", function () {
         .map(cb => cb.value);
 
       if (selected.length > 0) {
-        deleteSelectedForm.classList.remove('d-none');
-        selectedTasksInput.value = selected.join(',');
+        deleteSelectedForm.classList.remove("d-none");
+        selectedTasksInput.value = selected.join(",");
       } else {
-        deleteSelectedForm.classList.add('d-none');
-        selectedTasksInput.value = '';
+        deleteSelectedForm.classList.add("d-none");
+        selectedTasksInput.value = "";
       }
     }
 
     checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', toggleDeleteSelectedButton);
+      checkbox.addEventListener("change", toggleDeleteSelectedButton);
     });
 
-    // Initial check in case anything pre-checked
-    toggleDeleteSelectedButton();
+    toggleDeleteSelectedButton(); // initial check
   }
 });
