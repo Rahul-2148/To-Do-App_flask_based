@@ -1,0 +1,20 @@
+/* 🌑 Dark Theme */
+body { background-color: #121212; color: #e4e4e4; }
+.auth-wrapper { background-color: #1e1e1e; border: 1px solid #333; }
+.table { background-color: #1e1e1e; color: #e4e4e4; }
+.table thead { background-color: #333; color: #f8f9fa; }
+.navbar { background-color: #1c1c1c; border-bottom: 1px solid #333; }
+.navbar .nav-link, .navbar-brand { color: #f8f9fa !important; }
+.btn-primary { background-color: #375a7f; border-color: #375a7f; }
+.btn-success { background-color: #00bc8c; border-color: #00bc8c; }
+.alert { background-color: #333; border-color: #555; color: #e4e4e4; }
+footer { background-color: #1a1a1a; color: #ccc; }
+
+.theme-navbar {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.theme-navbar .nav-link {
+  color: #ffffff !important;
+}

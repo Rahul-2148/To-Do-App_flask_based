@@ -1,0 +1,19 @@
+/* 🪔 Indian Festival Theme */
+body { background-color: #fff8e7; color: #5d4037; font-family: 'Segoe UI', sans-serif; }
+.auth-wrapper { background-color: #ffe0b2; border: 1px solid #ffcc80; }
+.table { background-color: #fff3e0; color: #6d4c41; }
+.table thead { background-color: #ffb74d; color: #3e2723; }
+.navbar { background-color: #ff9800; }
+.navbar .nav-link, .navbar-brand { color: #fff !important; }
+.btn-primary { background-color: #f57c00; border-color: #f57c00; }
+.btn-success { background-color: #43a047; border-color: #43a047; }
+.alert { background-color: #ffe082; border-color: #ffca28; color: #5d4037; }
+footer { background-color: #ef6c00; color: #fff3e0; }
+.theme-navbar {
+  background: linear-gradient(to right, #ff9933, #ffffff, #138808);
+  color: #000;
+}
+
+.theme-navbar .nav-link {
+  color: #000 !important;
+}

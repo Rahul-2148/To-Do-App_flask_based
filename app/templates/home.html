@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center mt-5">
+    <h1>👋 Welcome to Your TODO App</h1>
+    <p class="mt-3">Manage your tasks with beautiful themes and a clean UI.</p>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-primary mt-4">Login</a>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary mt-4 ms-2">Register</a>
+</div>
+{% endblock %}

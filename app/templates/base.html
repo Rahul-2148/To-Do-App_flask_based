@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}TODO App{% endblock %}</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      id="themeStylesheet"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='themes/' + session.get('theme', 'light') + '.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body class="theme-{{ session.get('theme', 'light') }}">
+    <nav class="navbar navbar-expand-lg theme-navbar px-4 fixed-top">
+      <a class="navbar-brand" href="#">📝 TODO APP</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <span class="nav-link disabled text-muted">
+              📧 {{ current_user.email }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('tasks.tasks') }}">Tasks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.register') }}"
+              >Register</a
+            >
+          </li>
+          {% endif %}
+
+          <!-- 🎨 Theme Selector -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="themeDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Theme 🎨
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a
+                  class="dropdown-item theme-select"
+                  data-theme="light"
+                  href="#"
+                  >🌕 Light</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item theme-select" data-theme="dark" href="#"
+                  >🌑 Dark</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item theme-select"
+                  data-theme="forest"
+                  href="#"
+                  >🌲 Forest</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item theme-select" data-theme="sky" href="#"
+                  >🌤️ Sky</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item theme-select"
+                  data-theme="dracula"
+                  href="#"
+                  >🧛 Dracula</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item theme-select"
+                  data-theme="indian_theme"
+                  href="#"
+                  >🎉 Indian Festival</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mt-2">
+        {% for category, message in messages %}
+        <div
+          class="alert alert-{{ 'success' if category == 'message' else category }} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <div class="container">
+        &copy; {{ current_year or 2025 }} Flask TODO App. Built with ❤️ by
+        <a href="https://github.com/Rahul-2148" target="_blank" rel="noopener"
+          >Rahul Raj Modi</a
+        >
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
+  </body>
+</html>

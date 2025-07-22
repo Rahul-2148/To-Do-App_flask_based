@@ -1,0 +1,19 @@
+/* 🌲 Forest Theme */
+body { background-color: #f0f7f4; color: #2f3e46; }
+.auth-wrapper { background-color: #d8f3dc; border: 1px solid #b7e4c7; }
+.table { background-color: #ffffff; color: #1b4332; }
+.table thead { background-color: #95d5b2; color: #081c15; }
+.navbar { background-color: #40916c; }
+.navbar .nav-link, .navbar-brand { color: #fff !important; }
+.btn-primary { background-color: #2d6a4f; border-color: #2d6a4f; }
+.btn-success { background-color: #1b4332; border-color: #1b4332; }
+.alert { background-color: #d8f3dc; border-color: #b7e4c7; color: #081c15; }
+footer { background-color: #2d6a4f; color: #e0f4e9; }
+.theme-navbar {
+  background-color: #014421;
+  color: #ffffff;
+}
+
+.theme-navbar .nav-link {
+  color: #ffffff !important;
+}

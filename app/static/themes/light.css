@@ -1,0 +1,19 @@
+body { background-color: #fff; color: black; }
+.auth-wrapper { background-color: #fff; border: 1px solid #fff; }
+.table { background-color: #fff; color: #1e1e1e; }
+.table thead { background-color: #f8f9fa; color: #1e1e1e; }
+.navbar { background-color: #fff; border-bottom: 1px solid #1c1c1c; }
+.navbar .nav-link, .navbar-brand { color: #f8f9fa !important; }
+.btn-primary { background-color: #375a7f; border-color: #375a7f; }
+.btn-success { background-color: #00bc8c; border-color: #00bc8c; }
+.alert { background-color: #e4e4e4; border-color: #555; color: #333; }
+footer { background-color: #ccc; color: #1a1a1a; }
+
+.theme-navbar {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.theme-navbar .nav-link {
+  color: #212529 !important;
+}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% block title %}My Tasks{% endblock %} {% block
+content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3>📋 My Tasks</h3>
+  <div class="d-flex align-items-center gap-2">
+    <!-- Clear All -->
+    <form method="POST" action="{{ url_for('tasks.clear_task') }}">
+      <button type="submit" class="btn btn-danger btn-sm">🧹 Clear All</button>
+    </form>
+
+    <!-- Delete Selected -->
+    <form method="POST" action="{{ url_for('tasks.delete_selected') }}" id="deleteSelectedForm" class="d-none">
+      <input type="hidden" name="selected_tasks" id="selectedTasksInput" />
+      <button type="submit" class="btn btn-warning btn-sm text-dark">
+        🗑️ Delete Selected
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<form
+  method="POST"
+  action="{{ url_for('tasks.add_task') }}"
+  class="input-group mb-4"
+>
+  <input
+    type="text"
+    name="title"
+    class="form-control"
+    placeholder="➕ Add new task"
+    required
+  />
+  <button class="btn btn-success" type="submit">Add</button>
+</form>
+
+<div class="table-responsive">
+  <table
+    class="table task-table table-bordered table-striped text-center align-middle"
+  >
+    <thead class="table-dark">
+      <tr>
+        <th>Select</th>
+        <th>#</th>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr class="status-{{ task.status|lower }}">
+        <td>
+          <input type="checkbox" class="form-check-input task-checkbox" name="selected_task" value="{{ task.id }}" onchange="toggleDeleteSelectedButton()" />
+
+        </td>
+        <td>{{ loop.index }}</td>
+        <td
+          class="task-title {% if task.status == 'done' %}done-task{% endif %}"
+        >
+          {{ task.title }}
+        </td>
+        <td>
+          {% if task.status == 'pending' %}
+          <span class="task-badge pending">Pending</span>
+          {% elif task.status == 'working' %}
+          <span class="task-badge working">Working</span>
+          {% else %}
+          <span class="task-badge done">Done</span>
+          {% endif %}
+        </td>
+        <td>
+          <form
+            method="POST"
+            action="{{ url_for('tasks.toggle_status', task_id=task.id) }}"
+          >
+            <button type="submit" class="btn btn-outline-primary btn-sm">
+              🔄 Toggle
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No tasks added yet!</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const checkboxes = document.querySelectorAll(".task-checkbox");
+  const deleteForm = document.getElementById("deleteSelectedForm");
+  const selectedTasksInput = document.getElementById("selectedTasksInput");
+
+  checkboxes.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      const selected = Array.from(checkboxes)
+        .filter((c) => c.checked)
+        .map((c) => c.value);
+
+      if (selected.length > 0) {
+        deleteForm.style.display = "inline-block";
+        selectedTasksInput.value = selected.join(",");
+      } else {
+        deleteForm.style.display = "none";
+        selectedTasksInput.value = "";
+      }
+    });
+  });
+</script>
+{% endblock %}
